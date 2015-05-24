@@ -6,8 +6,9 @@ download.file(fileUrl, destfile = "./data/FNEI_data.zip")
 unzip("./data/FNEI_data.zip", exdir = "./data")
 
 NEI <- readRDS("./data/summarySCC_PM25.rds")
-sumByYear <- aggregate(Emissions ~ year, NEI, sum)
+Baltimore <- NEI[NEI$fips=="24510", ]
+sumByYear <- aggregate(Emissions ~ year, Baltimore, sum)
 
-png('./exdata-014/plot1.png')
-barplot(height = sumByYear$Emissions, names.arg = sumByYear$year, xlab = "Year", ylab = "Total PM2.5 Emission", main = "Total PM2.5 Emissions By Years")
+png('./exdata-014/plot2.png')
+barplot(height = sumByYear$Emissions, names.arg = sumByYear$year, xlab = "Year", ylab = "Baltimore PM2.5 Emission", main = "Baltimore PM2.5 Emissions By Years")
 dev.off()
